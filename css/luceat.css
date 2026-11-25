@@ -96,10 +96,11 @@ h2 { margin: 0 0 32px; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700
 .progetto .etichetta::before { background: var(--oro); }
 
 /* i due lati del flyer in formato A5, scritti in HTML; clic = flyer in alta risoluzione */
-.flyer { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; max-width: 960px; }
+/* --u = 1% della larghezza del flyer: 460px su schermo grande, tutta la larghezza su telefono */
+.flyer { --u: min(4.6px, calc((100vw - 48px) / 100)); display: flex; flex-wrap: wrap; gap: 36px; }
 .a5 {
-  display: block; position: relative; aspect-ratio: 1 / 1.414; container-type: inline-size;
-  padding: 7cqw; text-decoration: none; color: var(--bianco); background: inherit;
+  display: block; position: relative; width: calc(var(--u) * 100); aspect-ratio: 1 / 1.414;
+  padding: calc(var(--u) * 7); text-decoration: none; color: var(--bianco); background: inherit;
   box-shadow: 0 0 0 1px rgba(255,255,255,.22), 0 18px 40px rgba(0,0,0,.35);
   transition: transform .2s; overflow: hidden;
 }
@@ -108,24 +109,24 @@ h2 { margin: 0 0 32px; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700
 .a5.fronte { display: flex; flex-direction: column; }
 .a5.fronte h1 { margin: 0; }
 .a5 .date-a5 { margin-top: auto; }
-.a5 .date-a5 .data { margin-bottom: 5.5cqw; }
+.a5 .date-a5 .data { margin-bottom: calc(var(--u) * 5.5); }
 .a5 .date-a5 .data:last-child { margin-bottom: 0; }
-.a5 .logo-a5 { width: 46cqw; margin: 0 0 4cqw -2cqw; }
-.a5 .logo-a5.piccolo { width: 30cqw; position: absolute; top: 5cqw; right: 5cqw; margin: 0; }
-.a5 .t1 { display: block; font-size: 8.6cqw; letter-spacing: .08em; line-height: 1; text-transform: uppercase; }
-.a5 .t2 { display: block; font-size: 19cqw; line-height: .95; text-transform: uppercase; margin-bottom: 6cqw; }
-.a5 .data { margin-bottom: 4.2cqw; text-transform: uppercase; }
-.a5 .data .q, .a5 .data .d { display: block; font-size: 4.3cqw; letter-spacing: .08em; line-height: 1.35; }
+.a5 .logo-a5 { width: calc(var(--u) * 46); margin: 0 0 calc(var(--u) * 4) calc(var(--u) * -2); }
+.a5 .logo-a5.piccolo { width: calc(var(--u) * 30); position: absolute; top: calc(var(--u) * 5); right: calc(var(--u) * 5); margin: 0; }
+.a5 .t1 { display: block; font-size: calc(var(--u) * 8.6); letter-spacing: .08em; line-height: 1; text-transform: uppercase; }
+.a5 .t2 { display: block; font-size: calc(var(--u) * 19); line-height: .95; text-transform: uppercase; margin-bottom: calc(var(--u) * 6); }
+.a5 .data { margin-bottom: calc(var(--u) * 4.2); text-transform: uppercase; }
+.a5 .data .q, .a5 .data .d { display: block; font-size: calc(var(--u) * 4.3); letter-spacing: .08em; line-height: 1.35; }
 .a5 .data small { font-size: .74em; letter-spacing: .12em; opacity: .85; }
-.a5 .data .n { display: block; font-size: 2.6cqw; font-weight: 700; letter-spacing: .24em; }
-.a5 .prog { margin-top: 16cqw; }
-.a5 .prog > div { margin-bottom: 3.6cqw; text-transform: uppercase; }
-.a5 .prog b { display: block; font-size: 5.8cqw; letter-spacing: .2em; line-height: 1.1; }
-.a5 .prog span { display: block; font-size: 3.7cqw; letter-spacing: .06em; line-height: 1.3; }
-.a5 .prog em { display: block; font-style: normal; font-size: 3.2cqw; text-transform: none; opacity: .85; }
-.a5 .ens { position: absolute; left: 7cqw; right: 7cqw; bottom: 7cqw; text-transform: uppercase; }
-.a5 .ens b { display: block; font-size: 6.4cqw; letter-spacing: .22em; }
-.a5 .ens span { display: block; font-size: 4.2cqw; letter-spacing: .05em; }
+.a5 .data .n { display: block; font-size: calc(var(--u) * 2.6); font-weight: 700; letter-spacing: .24em; }
+.a5 .prog { margin-top: calc(var(--u) * 16); }
+.a5 .prog > div { margin-bottom: calc(var(--u) * 3.6); text-transform: uppercase; }
+.a5 .prog b { display: block; font-size: calc(var(--u) * 5.8); letter-spacing: .2em; line-height: 1.1; }
+.a5 .prog span { display: block; font-size: calc(var(--u) * 3.7); letter-spacing: .06em; line-height: 1.3; }
+.a5 .prog em { display: block; font-style: normal; font-size: calc(var(--u) * 3.2); text-transform: none; opacity: .85; }
+.a5 .ens { position: absolute; left: calc(var(--u) * 7); right: calc(var(--u) * 7); bottom: calc(var(--u) * 7); text-transform: uppercase; }
+.a5 .ens b { display: block; font-size: calc(var(--u) * 6.4); letter-spacing: .22em; }
+.a5 .ens span { display: block; font-size: calc(var(--u) * 4.2); letter-spacing: .05em; }
 .flyer-nota { margin: 16px 0 0; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
 
 /* ingresso: QR | testo | biglietti */
@@ -177,7 +178,7 @@ h2 { margin: 0 0 32px; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700
   .testata .logo img { height: 64px; }
   .menu { width: 100%; gap: 16px; flex-wrap: wrap; }
   .copertina { height: 60vh; }
-  .flyer, .due, .sostenitori, .quote { grid-template-columns: 1fr; }
+  .due, .sostenitori, .quote { grid-template-columns: 1fr; }
   .ingresso { grid-template-columns: auto 1fr; }
   .ingresso .bottone { grid-column: 1 / -1; justify-self: start; }
   section { padding: 56px 0; }
