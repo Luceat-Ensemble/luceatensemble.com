@@ -168,8 +168,11 @@ h2 { margin: 0 0 32px; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700
 .scura { background: var(--blu); color: var(--bianco); }
 .sostenitori { display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: start; }
 .sostenitori .etichetta { font-size: .72rem; margin-bottom: 18px; }
-.loghi { display: flex; flex-wrap: wrap; align-items: center; gap: 26px 36px; }
-.loghi img { height: 44px; width: auto; max-width: 150px; object-fit: contain; }
+/* griglia regolare: ogni logo in una cella uguale, centrato */
+.loghi { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 28px 32px; align-items: center; }
+.loghi img { width: 100%; height: 56px; object-fit: contain; object-position: left center; }
+.loghi img.alto { height: 76px; }   /* loghi rotondi o quadrati: piu' alti per pesare come le scritte */
+.partner .loghi { grid-template-columns: 180px; }
 .loghi .bianco { filter: brightness(0) invert(1); }
 .loghi .negativo { filter: grayscale(1) invert(1); mix-blend-mode: screen; }
 .partner img { height: 56px; }
