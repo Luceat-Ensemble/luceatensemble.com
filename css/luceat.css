@@ -68,7 +68,7 @@ a { color: inherit; }
   .copertina img.slide { animation: none; }
   .copertina img.slide:first-child { opacity: 1; }
 }
-.copertina::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(1,22,39,0) 40%, rgba(1,22,39,.9) 100%); }
+.copertina::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(1,22,39,0) 30%, rgba(1,22,39,.55) 60%, rgba(1,22,39,.95) 100%); }
 .copertina .marchio { position: absolute; left: 0; right: 0; bottom: 30px; z-index: 1; color: var(--bianco); }
 .copertina .marchio img { height: clamp(120px, 18vw, 200px); width: auto; margin-left: -2%; }
 .copertina .marchio span { display: block; margin-top: -4px; font-size: clamp(.95rem, 1.7vw, 1.2rem); letter-spacing: .32em; text-transform: uppercase; }
@@ -96,30 +96,30 @@ h2 { margin: 0 0 32px; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700
 .progetto .etichetta::before { background: var(--oro); }
 
 /* i due lati del flyer in formato A5, scritti in HTML; clic = flyer in alta risoluzione */
-.flyer { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+.flyer { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; max-width: 960px; }
 .a5 {
   display: block; position: relative; aspect-ratio: 1 / 1.414; container-type: inline-size;
   padding: 7cqw; text-decoration: none; color: var(--bianco); background: inherit;
   box-shadow: 0 0 0 1px rgba(255,255,255,.22), 0 18px 40px rgba(0,0,0,.35);
-  transition: transform .2s;
+  transition: transform .2s; overflow: hidden;
 }
 .a5:hover { transform: translateY(-4px); }
 .a5 .logo-a5 { width: 46cqw; margin: 0 0 4cqw -2cqw; }
 .a5 .logo-a5.piccolo { width: 30cqw; position: absolute; top: 5cqw; right: 5cqw; margin: 0; }
-.a5 .t1 { display: block; font-size: 7.4cqw; letter-spacing: .08em; line-height: 1; text-transform: uppercase; }
-.a5 .t2 { display: block; font-size: 17cqw; line-height: .95; text-transform: uppercase; margin-bottom: 6cqw; }
+.a5 .t1 { display: block; font-size: 8.6cqw; letter-spacing: .08em; line-height: 1; text-transform: uppercase; }
+.a5 .t2 { display: block; font-size: 19cqw; line-height: .95; text-transform: uppercase; margin-bottom: 6cqw; }
 .a5 .data { margin-bottom: 4.2cqw; text-transform: uppercase; }
-.a5 .data .q, .a5 .data .d { display: block; font-size: 3.9cqw; letter-spacing: .08em; line-height: 1.35; }
+.a5 .data .q, .a5 .data .d { display: block; font-size: 4.3cqw; letter-spacing: .08em; line-height: 1.35; }
 .a5 .data small { font-size: .74em; letter-spacing: .12em; opacity: .85; }
-.a5 .data .n { display: block; font-size: 2.3cqw; font-weight: 700; letter-spacing: .24em; }
-.a5 .prog { margin-top: 14cqw; }
+.a5 .data .n { display: block; font-size: 2.6cqw; font-weight: 700; letter-spacing: .24em; }
+.a5 .prog { margin-top: 16cqw; }
 .a5 .prog > div { margin-bottom: 3.6cqw; text-transform: uppercase; }
-.a5 .prog b { display: block; font-size: 5cqw; letter-spacing: .2em; line-height: 1.1; }
-.a5 .prog span { display: block; font-size: 3.3cqw; letter-spacing: .06em; line-height: 1.3; }
-.a5 .prog em { display: block; font-style: normal; font-size: 2.8cqw; text-transform: none; opacity: .85; }
+.a5 .prog b { display: block; font-size: 5.8cqw; letter-spacing: .2em; line-height: 1.1; }
+.a5 .prog span { display: block; font-size: 3.7cqw; letter-spacing: .06em; line-height: 1.3; }
+.a5 .prog em { display: block; font-style: normal; font-size: 3.2cqw; text-transform: none; opacity: .85; }
 .a5 .ens { position: absolute; left: 7cqw; right: 7cqw; bottom: 7cqw; text-transform: uppercase; }
-.a5 .ens b { display: block; font-size: 5.6cqw; letter-spacing: .22em; }
-.a5 .ens span { display: block; font-size: 3.6cqw; letter-spacing: .05em; }
+.a5 .ens b { display: block; font-size: 6.4cqw; letter-spacing: .22em; }
+.a5 .ens span { display: block; font-size: 4.2cqw; letter-spacing: .05em; }
 .flyer-nota { margin: 16px 0 0; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
 
 /* ingresso: QR | testo | biglietti */
