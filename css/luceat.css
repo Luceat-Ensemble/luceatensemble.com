@@ -1,18 +1,12 @@
 /* Luceat Ensemble - stile del sito.
    Colori: blu scuro (principale), oro e bianco. L'oro solo su fondo scuro (su chiaro non si legge).
-   Ogni progetto ha il colore del suo flyer: Natale rosso, Pasqua blu, CUJM verde.
-   Tipografia dei flyer (Gill Sans -> Gillius ADF). */
+   Natale rosso, Pasqua blu, CUJM verde: solo come colore del progetto.
+   Font: Gillius ADF (simile a Gill Sans), SEMPRE peso normale: niente grassetti (Gillius e' gia' piu' pesante del Gill Sans Light/Book). */
 
 @font-face {
   font-family: "Gillius";
   src: url("../rep/tipografia/font/GilliusADF-Regular.otf") format("opentype");
   font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gillius";
-  src: url("../rep/tipografia/font/GilliusADF-Bold.otf") format("opentype");
-  font-weight: 700;
   font-display: swap;
 }
 
@@ -24,9 +18,10 @@
   --natale: #430b0e;
   --pasqua: #011629;
   --cujm: #012718;
+  --antracite: #1c1c1e;
   --testo: #011627;
-  --tenue: rgba(1, 22, 39, .7);
-  --linea: rgba(1, 22, 39, .16);
+  --tenue: rgba(1, 22, 39, .68);
+  --linea: rgba(1, 22, 39, .14);
   --max: 1160px;
 }
 
@@ -37,19 +32,24 @@ body {
   background: var(--bianco);
   color: var(--testo);
   font-family: "Gillius", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+  font-weight: 400;
   font-size: 18px;
-  line-height: 1.55;
+  line-height: 1.6;
   letter-spacing: .02em;
   -webkit-font-smoothing: antialiased;
 }
+b, strong, h1, h2, h3, th { font-weight: 400; }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+.maiu { text-transform: uppercase; letter-spacing: .16em; }
 
 /* ---------- barra in alto: blu, menu chiaro ---------- */
 .testata { position: sticky; top: 0; z-index: 10; background: var(--blu); color: var(--bianco); }
 .testata .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 96px; }
+.testata .logo { display: flex; align-items: center; gap: 18px; text-decoration: none; }
 .testata .logo img { height: 84px; width: auto; }
+.testata .logo span { padding-left: 18px; border-left: 1px solid rgba(255,255,255,.3); text-transform: uppercase; letter-spacing: .3em; font-size: .72rem; opacity: .8; }
 .menu { display: flex; align-items: center; gap: 30px; list-style: none; margin: 0; padding: 0; }
 .menu a { text-decoration: none; text-transform: uppercase; letter-spacing: .2em; font-size: .8rem; }
 .menu a:hover, .menu a[aria-current="page"] { color: var(--oro); }
@@ -57,80 +57,84 @@ a { color: inherit; }
 .lingue a { text-decoration: none; opacity: .6; }
 .lingue a[aria-current] { opacity: 1; color: var(--oro); }
 
-/* ---------- copertina: foto a scorrimento + logo ---------- */
-.copertina { position: relative; height: min(80vh, 760px); background: var(--blu); overflow: hidden; }
-.copertina img.slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; opacity: 0; animation: dissolvenza 18s infinite; }
-.copertina img.slide:nth-child(1) { animation-delay: 0s; }
-.copertina img.slide:nth-child(2) { animation-delay: 6s; }
-.copertina img.slide:nth-child(3) { animation-delay: 12s; }
+/* ---------- copertina: foto a scorrimento, pulite (nessun filtro) ---------- */
+.copertina { position: relative; height: min(78vh, 740px); background: var(--blu); overflow: hidden; }
+.copertina img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; opacity: 0; animation: dissolvenza 18s infinite; }
+.copertina img:nth-child(1) { animation-delay: 0s; }
+.copertina img:nth-child(2) { animation-delay: 6s; }
+.copertina img:nth-child(3) { animation-delay: 12s; }
 @keyframes dissolvenza { 0% { opacity: 0; } 6% { opacity: 1; } 33% { opacity: 1; } 40% { opacity: 0; } 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
-  .copertina img.slide { animation: none; }
-  .copertina img.slide:first-child { opacity: 1; }
+  .copertina img { animation: none; }
+  .copertina img:first-child { opacity: 1; }
 }
-.copertina::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(1,22,39,0) 30%, rgba(1,22,39,.55) 60%, rgba(1,22,39,.95) 100%); }
-.copertina .marchio { position: absolute; left: 0; right: 0; bottom: 30px; z-index: 1; color: var(--bianco); }
-.copertina .marchio img { height: clamp(120px, 18vw, 200px); width: auto; margin-left: -2%; }
-.copertina .marchio span { display: block; margin-top: -4px; font-size: clamp(.95rem, 1.7vw, 1.2rem); letter-spacing: .32em; text-transform: uppercase; }
+/* fascia sotto la foto */
+.motto { background: var(--blu); color: var(--bianco); padding: 22px 0; }
+.motto .wrap { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.motto span { text-transform: uppercase; letter-spacing: .32em; font-size: .85rem; }
+.motto span.oro { color: var(--oro); }
 
 /* ---------- sezioni ---------- */
-section { padding: 84px 0; }
+section { padding: 80px 0; }
 .chiara { background: var(--chiaro); }
 /* etichetta: testo blu, trattino oro (l'oro su chiaro solo come segno, mai come testo) */
-.etichetta { display: flex; align-items: center; gap: 14px; margin: 0 0 22px; font-size: .8rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
-.etichetta::before { content: ""; width: 36px; height: 3px; background: var(--oro); }
-h2 { margin: 0 0 32px; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700; letter-spacing: .2em; text-transform: uppercase; line-height: 1.15; }
+.etichetta { display: flex; align-items: center; gap: 14px; margin: 0 0 20px; font-size: .78rem; letter-spacing: .3em; text-transform: uppercase; }
+.etichetta::before { content: ""; width: 36px; height: 2px; background: var(--oro); }
+h2 { margin: 0 0 28px; font-size: clamp(1.9rem, 3.6vw, 2.8rem); letter-spacing: .12em; text-transform: uppercase; line-height: 1.15; }
 
 .bottone {
   display: inline-block; padding: 15px 30px;
-  background: var(--blu); color: var(--bianco); text-decoration: none;
-  text-transform: uppercase; letter-spacing: .24em; font-size: .8rem; white-space: nowrap;
+  background: var(--blu); color: var(--bianco); text-decoration: none; border: 0; cursor: pointer; font: inherit;
+  text-transform: uppercase; letter-spacing: .24em; font-size: .78rem; white-space: nowrap;
 }
 .bottone:hover { background: var(--oro); color: var(--blu); }
+.bottone.oro { background: var(--oro); color: var(--blu); }
+.bottone.oro:hover { background: var(--bianco); }
+.bottone.contorno { background: transparent; color: var(--testo); box-shadow: inset 0 0 0 1px var(--testo); }
+.bottone.contorno:hover { background: var(--blu); color: var(--bianco); }
 
-/* ---------- prossimi concerti: colore del flyer del progetto ---------- */
-.progetto { color: var(--bianco); }
-.progetto.natale { background: var(--natale); }
-.progetto.pasqua { background: var(--pasqua); }
-.progetto.cujm { background: var(--cujm); }
-.progetto .etichetta::before { background: var(--oro); }
+/* ---------- prossimi concerti (home): fascia nel colore del progetto ---------- */
+.prossimi { color: var(--bianco); }
+.natale { --colore: var(--natale); }
+.pasqua { --colore: var(--pasqua); }
+.cujm { --colore: var(--cujm); }
+.prossimi { background: var(--colore); }
+.prossimi .testa { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+.prossimi .testa .titolo { margin: 0; }
+.prossimi .sottotitolo { margin: 0 0 10px; text-transform: uppercase; letter-spacing: .28em; font-size: .75rem; opacity: .75; }
+.prossimi .miniature { grid-template-columns: 1fr; }
+.prossimi .titolo { margin: 0 0 36px; font-size: clamp(2.2rem, 5vw, 3.6rem); letter-spacing: .1em; text-transform: uppercase; line-height: 1.05; }
+.prossimi .titolo small { display: block; font-size: .32em; letter-spacing: .32em; color: var(--oro); margin-bottom: 10px; }
+.prossimi .griglia { display: grid; grid-template-columns: 1fr 1.25fr 210px; gap: 48px; align-items: start; }
+.date { list-style: none; margin: 0; padding: 0; }
+.date li { padding: 14px 0; border-top: 1px solid rgba(255,255,255,.22); }
+.date li:last-child { border-bottom: 1px solid rgba(255,255,255,.22); }
+.date .quando { display: block; text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; opacity: .7; }
+.date .dove { display: block; font-size: .98rem; opacity: .92; }
+.date .nota { display: block; font-size: .82rem; color: var(--oro); }
+.programma { list-style: none; margin: 0; padding: 0; }
+.programma li { padding: 9px 0; border-top: 1px solid rgba(255,255,255,.22); }
+.programma .chi { display: block; text-transform: uppercase; letter-spacing: .22em; font-size: .72rem; color: var(--oro); }
+.programma .cosa { display: block; font-size: .95rem; opacity: .9; }
+.programma .cosa em { font-style: normal; opacity: .8; font-size: .9rem; }
+.direzione { margin: 18px 0 0; font-size: .9rem; opacity: .85; }
 
-/* i due lati del flyer in formato A5, scritti in HTML; clic = flyer in alta risoluzione */
-/* --u = 1% della larghezza del flyer: 460px su schermo grande, tutta la larghezza su telefono */
-.flyer { --u: min(4.6px, calc((100vw - 48px) / 100)); display: flex; flex-wrap: wrap; gap: 36px; }
-.a5 {
-  display: block; position: relative; width: calc(var(--u) * 100); aspect-ratio: 1 / 1.414;
-  padding: calc(var(--u) * 7); text-decoration: none; color: var(--bianco); background: inherit;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.22), 0 18px 40px rgba(0,0,0,.35);
-  transition: transform .2s; overflow: hidden;
-}
-.a5:hover { transform: translateY(-4px); }
-/* fronte come il flyer: logo e titolo in alto, date in basso */
-.a5.fronte { display: flex; flex-direction: column; }
-.a5.fronte h1 { margin: 0; }
-.a5 .date-a5 { margin-top: auto; }
-.a5 .date-a5 .data { margin-bottom: calc(var(--u) * 5.5); }
-.a5 .date-a5 .data:last-child { margin-bottom: 0; }
-.a5 .logo-a5 { width: calc(var(--u) * 46); margin: 0 0 calc(var(--u) * 4) calc(var(--u) * -2); }
-.a5 .logo-a5.piccolo { width: calc(var(--u) * 30); position: absolute; top: calc(var(--u) * 5); right: calc(var(--u) * 5); margin: 0; }
-.a5 .t1 { display: block; font-size: calc(var(--u) * 8.6); letter-spacing: .08em; line-height: 1; text-transform: uppercase; }
-.a5 .t2 { display: block; font-size: calc(var(--u) * 19); line-height: .95; text-transform: uppercase; margin-bottom: calc(var(--u) * 6); }
-.a5 .data { margin-bottom: calc(var(--u) * 4.2); text-transform: uppercase; }
-.a5 .data .q, .a5 .data .d { display: block; font-size: calc(var(--u) * 4.3); letter-spacing: .08em; line-height: 1.35; }
-.a5 .data small { font-size: .74em; letter-spacing: .12em; opacity: .85; }
-.a5 .data .n { display: block; font-size: calc(var(--u) * 2.5); font-weight: 700; letter-spacing: .14em; }
-.a5.retro { display: flex; flex-direction: column; }
-.a5 .prog { margin-top: calc(var(--u) * 13); }
-.a5 .prog > div { margin-bottom: calc(var(--u) * 2.8); text-transform: uppercase; }
-.a5 .prog b { display: block; font-size: calc(var(--u) * 5.2); letter-spacing: .2em; line-height: 1.1; }
-.a5 .prog span { display: block; font-size: calc(var(--u) * 3.4); letter-spacing: .06em; line-height: 1.3; }
-.a5 .prog em { display: block; font-style: normal; font-size: calc(var(--u) * 3.2); text-transform: none; opacity: .85; }
-.a5 .ens { margin-top: auto; text-transform: uppercase; }
-.a5 .ens b { display: block; font-size: calc(var(--u) * 6.4); letter-spacing: .22em; }
-.a5 .ens span { display: block; font-size: calc(var(--u) * 4.2); letter-spacing: .05em; }
-/* flyer in sovrapposizione */
+/* flyer: due miniature, clic = sovrapposizione con scorrimento fronte/retro */
+.miniature { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.miniature a { display: block; box-shadow: 0 8px 22px rgba(0,0,0,.28); transition: transform .2s; }
+.miniature a:hover { transform: translateY(-3px); }
+.miniature img { width: 100%; aspect-ratio: 1 / 1.414; object-fit: cover; }
+.miniature .nota { grid-column: 1 / -1; margin: 2px 0 0; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
+
+/* ingresso: QR | testo | biglietti */
+.ingresso { display: grid; grid-template-columns: auto 1fr auto; gap: 32px; align-items: center; margin-top: 48px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.22); }
+.ingresso .qr { width: 120px; background: #fff; padding: 8px; }
+.ingresso .prezzo { font-size: clamp(1.2rem, 2.2vw, 1.5rem); letter-spacing: .2em; text-transform: uppercase; }
+.ingresso p { margin: 6px 0 0; letter-spacing: .12em; text-transform: uppercase; font-size: .8rem; opacity: .85; }
+
+/* ---------- sovrapposizione immagini ---------- */
 .lightbox { width: 100vw; height: 100vh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; }
-.lightbox::backdrop { background: rgba(1, 22, 39, .92); }
+.lightbox::backdrop { background: rgba(1, 22, 39, .93); }
 .lb-scorri { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .lb-scorri::-webkit-scrollbar { display: none; }
 .lb-scorri img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: contain; padding: 4vh 6vw; scroll-snap-align: center; }
@@ -140,62 +144,232 @@ h2 { margin: 0 0 32px; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700
 .lb-prec { left: 8px; top: 50%; transform: translateY(-50%); }
 .lb-succ { right: 8px; top: 50%; transform: translateY(-50%); }
 
-.flyer-nota { margin: 16px 0 0; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
-
-/* ingresso: QR | testo | biglietti */
-.ingresso { display: grid; grid-template-columns: auto 1fr auto; gap: 36px; align-items: center; margin-top: 56px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,.25); }
-.ingresso .qr { width: 140px; background: #fff; padding: 8px; }
-.ingresso .prezzo { font-weight: 700; font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: .22em; text-transform: uppercase; }
-.ingresso p { margin: 8px 0 0; letter-spacing: .16em; text-transform: uppercase; font-size: .82rem; }
-.ingresso .tenue { opacity: .8; }
-.progetto .bottone { background: var(--oro); color: var(--blu); font-weight: 700; }
-.progetto .bottone:hover { background: var(--bianco); }
-
-/* chi siamo */
+/* ---------- chi siamo ---------- */
 .due { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
 .due p { margin: 0 0 1em; font-size: 1.05rem; }
-.due .bottone { margin-top: 10px; }
+.due .bottone { margin-top: 8px; }
 .due img { width: 100%; height: auto; }
 
-/* amici */
-.quote { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px; }
-.quota { background: var(--blu); color: var(--bianco); padding: 28px 24px; }
-.quota .dyn { font-family: "Times New Roman", Georgia, serif; font-style: italic; font-weight: 700; font-size: 2.6rem; line-height: 1; color: var(--oro); }
-.quota .nome { display: block; margin-top: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
-.quota .chf { display: block; letter-spacing: .14em; text-transform: uppercase; font-size: .9rem; color: var(--oro); }
-.quota p { margin: 12px 0 0; font-size: .95rem; opacity: .85; }
+/* ---------- quote Amici: righe sottili ---------- */
+.quote { list-style: none; margin: 0; padding: 0; }
+.quote li { display: grid; grid-template-columns: 56px 150px 110px 1fr; gap: 16px; align-items: baseline; padding: 12px 0; border-top: 1px solid var(--linea); }
+.quote li:last-child { border-bottom: 1px solid var(--linea); }
+.quote .dyn { font-family: "Times New Roman", Georgia, serif; font-style: italic; font-size: 1.7rem; line-height: 1; }
+.quote .nome { text-transform: uppercase; letter-spacing: .18em; font-size: .85rem; }
+.quote .chf { letter-spacing: .06em; }
+.quote .cosa { font-size: .95rem; color: var(--tenue); }
+/* richiamo Amici in home */
+.richiamo { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 32px; padding: 26px 30px; background: var(--blu); color: var(--bianco); }
+.richiamo p { margin: 0; font-size: 1.1rem; }
+.richiamo p small { display: block; font-size: .85rem; opacity: .8; }
 
-/* sostenitori e piede: fascia blu */
+/* ---------- sostenitori (blu) e piede (antracite) ---------- */
 .scura { background: var(--blu); color: var(--bianco); }
-.sostenitori { display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: start; }
-.sostenitori .etichetta { font-size: .72rem; margin-bottom: 18px; }
-/* griglia regolare: ogni logo in una cella uguale, centrato */
-.loghi { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 28px 32px; align-items: center; }
-.loghi img { width: 100%; height: 56px; object-fit: contain; object-position: left center; }
-.loghi img.alto { height: 76px; }   /* loghi rotondi o quadrati: piu' alti per pesare come le scritte */
-.partner .loghi { grid-template-columns: 180px; }
+.sostenitori { display: grid; grid-template-columns: 220px 1fr; gap: 56px; align-items: start; }
+.sostenitori .etichetta { font-size: .72rem; margin-bottom: 22px; }
+.partner img { height: 64px; width: auto; filter: brightness(0) invert(1); }
+.loghi { display: flex; flex-wrap: wrap; align-items: center; gap: 30px 48px; }
+.loghi img { height: 32px; width: auto; max-width: 170px; object-fit: contain; }
+.loghi img.alto { height: 46px; }      /* loghi rotondi o quadrati */
 .loghi .bianco { filter: brightness(0) invert(1); }
 .loghi .negativo { filter: grayscale(1) invert(1); mix-blend-mode: screen; }
-.partner img { height: 56px; }
 
-.piede { padding: 48px 0 40px; background: #1c1c1e; text-align: center; }   /* antracite: separa dal blu dei sostenitori */
-.piede .seguici { text-transform: uppercase; letter-spacing: .22em; font-size: .78rem; }
-.social { display: flex; justify-content: center; gap: 26px; margin: 14px 0 26px; }
-.social a { display: block; width: 34px; height: 34px; }
+.piede { padding: 44px 0 36px; background: var(--antracite); color: var(--bianco); text-align: center; }
+.piede .seguici { text-transform: uppercase; letter-spacing: .22em; font-size: .75rem; }
+.social { display: flex; justify-content: center; gap: 26px; margin: 14px 0 24px; }
+.social a { display: block; width: 30px; height: 30px; }
 .social svg { width: 100%; height: 100%; fill: currentColor; }
 .social a:hover { color: var(--oro); }
-.piede a.mail { text-decoration: none; letter-spacing: .1em; }
-.piede small { display: block; margin-top: 14px; letter-spacing: .12em; opacity: .7; font-size: .72rem; text-transform: uppercase; }
+.piede a.mail { text-decoration: none; letter-spacing: .08em; }
+.piede small { display: block; margin-top: 12px; letter-spacing: .12em; opacity: .65; font-size: .72rem; text-transform: uppercase; }
+.piede .legale { display: inline-block; margin-top: 8px; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; opacity: .65; text-decoration: none; }
+
+/* ---------- intestazione delle pagine interne ---------- */
+/* intestazione delle pagine interne: su beige, titolo blu con trattino oro */
+.intestazione { background: var(--chiaro); color: var(--testo); padding: 64px 0 8px; }
+.intestazione h1::after { content: ""; display: block; width: 48px; height: 2px; margin-top: 18px; background: var(--oro); }
+.intestazione h1 { margin: 0; font-size: clamp(2rem, 4.6vw, 3.2rem); letter-spacing: .14em; text-transform: uppercase; line-height: 1.05; }
+.intestazione p { margin: 14px 0 0; max-width: 760px; color: var(--tenue); }
+
+/* ---------- concerti (archivio): bianco e compatto ---------- */
+.archivio { padding: 40px 0 72px; }
+.progetto { display: grid; grid-template-columns: 1fr 220px; gap: 40px; align-items: start; padding: 30px 0 30px 26px; border-bottom: 1px solid var(--linea); border-left: 4px solid var(--colore); margin-bottom: 18px; }
+.progetto h2 { margin: 0 0 12px; font-size: 1.45rem; letter-spacing: .12em; }
+.progetto h2 small { font-size: .62em; letter-spacing: .24em; color: var(--tenue); margin-left: 10px; }
+.progetto .righe { list-style: none; margin: 0 0 12px; padding: 0; font-size: .95rem; }
+.progetto .righe li { padding: 2px 0; }
+.progetto .righe .quando { display: inline-block; min-width: 250px; text-transform: uppercase; letter-spacing: .1em; font-size: .85rem; color: var(--tenue); }
+.progetto .compositori { margin: 0; font-size: .95rem; text-transform: uppercase; letter-spacing: .16em; }
+.progetto .compositori span + span::before { content: " · "; color: var(--tenue); }
+.progetto .extra { margin: 6px 0 0; font-size: .88rem; color: var(--tenue); }
+.progetto .lato { display: grid; gap: 12px; }
+.progetto .lato .bottone { text-align: center; padding: 11px 12px; font-size: .7rem; letter-spacing: .18em; }
+.progetto .miniature a { box-shadow: 0 4px 12px rgba(1,22,39,.18); }
+
+/* ---------- media ---------- */
+/* foto a mosaico: altezze diverse, verticali e orizzontali */
+.mosaico { columns: 3 260px; column-gap: 12px; }
+.mosaico a { display: block; margin-bottom: 12px; break-inside: avoid; overflow: hidden; }
+.mosaico img { width: 100%; height: auto; transition: transform .4s; }
+.mosaico a:hover img { transform: scale(1.03); }
+.mosaico a:nth-child(3n+1) img { aspect-ratio: 4 / 5; object-fit: cover; }
+
+.video-griglia { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px 32px; }
+.video-griglia figure { margin: 0; }
+.video-griglia .quando { display: block; margin-bottom: 10px; text-transform: uppercase; letter-spacing: .28em; font-size: .78rem; }
+.video, .video-griglia iframe { display: block; position: relative; width: 100%; aspect-ratio: 16 / 9; border: 0; padding: 0; background: var(--blu); cursor: pointer; overflow: hidden; }
+.video img { width: 100%; height: 100%; object-fit: cover; opacity: .9; transition: opacity .2s; }
+.video:hover img { opacity: 1; }
+.video::after { content: ""; position: absolute; left: 50%; top: 50%; width: 68px; height: 48px; transform: translate(-50%, -50%); border-radius: 12px; background: rgba(1,22,39,.85) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23eab003' d='M8 5v14l11-7z'/%3E%3C/svg%3E") center / 28px no-repeat; }
+.video-griglia figcaption { margin-top: 12px; }
+.video-griglia figcaption .chi { display: block; text-transform: uppercase; letter-spacing: .2em; font-size: .85rem; }
+.video-griglia figcaption .cosa { display: block; font-size: 1rem; color: var(--tenue); }
+.video-nota { margin: 32px 0 0; font-size: .85rem; color: var(--tenue); }
+
+/* ---------- amici: quote e modulo affiancati ---------- */
+.adesione { display: grid; grid-template-columns: 1.25fr 1fr; gap: 56px; align-items: start; }
+.pagamento { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.pagamento .riquadro { background: var(--bianco); padding: 26px; }
+.pagamento h3 { margin: 0 0 12px; font-size: .95rem; letter-spacing: .22em; text-transform: uppercase; }
+.pagamento .iban { font-size: 1.2rem; letter-spacing: .08em; }
+.pagamento .twint { display: flex; gap: 22px; align-items: center; }
+.pagamento .twint img { width: 140px; }
+
+/* modulo EmailOctopus: adatto il suo stile a quello del sito */
+.eo-modulo { background: var(--bianco); padding: 6px 4px; }
+.eo-modulo, .eo-modulo * { font-family: "Gillius", "Gill Sans", Calibri, sans-serif !important; font-weight: 400 !important; }
+.eo-modulo input[type=text], .eo-modulo input[type=email], .eo-modulo select {
+  border: 1px solid var(--linea) !important; border-radius: 0 !important; background: var(--bianco) !important; color: var(--testo) !important;
+}
+.eo-modulo label { color: var(--testo) !important; letter-spacing: .04em; }
+.eo-modulo button, .eo-modulo input[type=submit] {
+  background: var(--blu) !important; color: var(--bianco) !important; border: 0 !important; border-radius: 0 !important;
+  text-transform: uppercase; letter-spacing: .24em !important;
+}
+.eo-modulo button:hover, .eo-modulo input[type=submit]:hover { background: var(--oro) !important; color: var(--blu) !important; }
+.nota-modulo { margin: 10px 0 0; font-size: .82rem; color: var(--tenue); }
+
+/* ---------- testo (privacy) ---------- */
+.testo-lungo { max-width: 780px; }
+.testo-lungo h2 { font-size: 1.05rem; letter-spacing: .2em; margin: 34px 0 10px; }
+.testo-lungo p, .testo-lungo li { font-size: 1rem; }
+
+/* ---------- pagine su beige (Concerti, Media, Amici, Chi siamo) ---------- */
+body.beige main { background: var(--chiaro); }
+.prossimi .bottone.oro { background: var(--bianco); color: var(--colore); }   /* Biglietti nella fascia del progetto */
+.prossimi .bottone.oro:hover { background: var(--oro); color: var(--blu); }
+
+/* ---------- concerti: per anno, flyer come immagine principale ---------- */
+.archivio { padding: 24px 0 90px; }
+.anno-gruppo { display: grid; grid-template-columns: 140px 1fr; gap: 32px; padding: 40px 0; border-top: 1px solid var(--linea); }
+.anno-gruppo:first-child { border-top: 0; }
+.anno-gruppo > h2 { margin: 0; font-size: 3.2rem; letter-spacing: .04em; line-height: 1; color: var(--testo); }
+.schede { display: grid; grid-template-columns: repeat(auto-fill, minmax(430px, 1fr)); gap: 36px 40px; }
+.scheda { display: grid; grid-template-columns: 132px 1fr; gap: 22px; align-items: start; }
+.scheda .flyer-img { display: block; box-shadow: 0 10px 24px rgba(1,22,39,.22); transition: transform .2s, box-shadow .2s; }
+.scheda .flyer-img:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(1,22,39,.3); }
+.scheda .flyer-img img { width: 100%; aspect-ratio: 1 / 1.414; object-fit: cover; }
+.scheda .retro { display: none; }
+.scheda h3 { margin: 0 0 4px; font-size: 1.2rem; letter-spacing: .1em; text-transform: uppercase; line-height: 1.25; }
+.scheda .tipo { display: block; margin-bottom: 10px; font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; color: var(--tenue); }
+.scheda .righe { list-style: none; margin: 0 0 10px; padding: 0; font-size: .9rem; }
+.scheda .righe li { padding: 1px 0; }
+.scheda .righe .quando { color: var(--tenue); }
+.scheda .compositori { margin: 0; font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; }
+.scheda .compositori span + span::before { content: " · "; }
+.scheda .extra { margin: 6px 0 0; font-size: .85rem; color: var(--tenue); }
+.scheda .azioni { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.scheda .bottone { padding: 9px 14px; font-size: .68rem; letter-spacing: .18em; }
+
+/* ---------- concerti: righe su beige, colore del progetto ben visibile, date a blocchi ---------- */
+.natale { --accento: #8c1d24; }
+.pasqua { --accento: #1f4278; }
+.cujm   { --accento: #1e5d3c; }
+.archivio .progetto { border-left: 0; padding: 30px 32px; margin-bottom: 20px; background: var(--bianco); border-bottom: 0; border-top: 4px solid var(--accento); align-items: center; }
+.progetto .tag { display: inline-block; padding: 3px 10px; margin-bottom: 10px; background: var(--accento); color: var(--bianco); font-size: .72rem; letter-spacing: .24em; }
+.progetto h2 { margin: 0 0 18px; }
+/* fino a 3 date su una riga; con 4 date due righe da 2 */
+.tappe { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 24px; }
+.tappe:has(> li:nth-child(4)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }   /* 4 date: 2 + 2, mai 3 + 1 */
+.tappe li { display: flex; gap: 12px; align-items: flex-start; }
+.tappe .data { flex: 0 0 auto; min-width: 2.4rem; display: flex; flex-direction: column; align-items: center; color: var(--accento); }
+.tappe .giorno { font-size: 1.9rem; line-height: 1; letter-spacing: -.01em; white-space: nowrap; }
+.tappe .mese { margin-top: 4px; text-transform: uppercase; letter-spacing: .18em; font-size: .66rem; }
+.tappe .testo { display: flex; flex-direction: column; min-width: 0; padding-top: 2px; }
+.tappe .citta { text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; line-height: 1.3; }
+.tappe .luogo { font-size: .86rem; color: var(--tenue); line-height: 1.3; margin-top: 2px; }
+.tappe .ora { font-size: .76rem; color: var(--tenue); letter-spacing: .04em; margin-top: 3px; }
+/* ---------- in onda (RSI) ---------- */
+.in-onda { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+.in-onda a { display: flex; flex-direction: column; height: 100%; padding: 22px 22px 20px; background: var(--bianco); text-decoration: none; border-top: 3px solid var(--blu); transition: border-color .2s, transform .2s; }
+.in-onda a:hover { border-top-color: var(--oro); transform: translateY(-2px); }
+.in-onda .fonte { text-transform: uppercase; letter-spacing: .2em; font-size: .7rem; color: var(--tenue); }
+.in-onda .titolo-io { margin: 10px 0 18px; font-size: 1.1rem; line-height: 1.35; }
+.in-onda .piede-io { margin-top: auto; display: flex; justify-content: space-between; font-size: .8rem; color: var(--tenue); }
+.in-onda .piede-io b { text-transform: uppercase; letter-spacing: .2em; font-size: .7rem; color: var(--testo); }
+.rimando { margin-top: 28px; font-size: .95rem; }
+.rimando a { text-transform: uppercase; letter-spacing: .18em; font-size: .78rem; }
+
+/* ---------- media su beige ---------- */
+.beige .video { background: transparent; }
+.beige section + section { padding-top: 0; }
+
+/* ---------- amici: quote a tutta larghezza, poi 1 e 2 affiancati ---------- */
+.dinamiche { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); }
+.dinamiche li { list-style: none; padding: 26px 20px 24px; border-left: 1px solid var(--linea); }
+.dinamiche li:first-child { border-left: 0; padding-left: 0; }
+.dinamiche .dyn { display: block; font-family: "Times New Roman", Georgia, serif; font-style: italic; font-size: 2.6rem; line-height: 1; }
+.dinamiche .nome { display: block; margin-top: 12px; text-transform: uppercase; letter-spacing: .2em; font-size: .78rem; }
+.dinamiche .chf { display: block; margin: 2px 0 10px; font-size: 1.15rem; }
+.dinamiche .cosa { display: block; font-size: .88rem; color: var(--tenue); line-height: 1.45; }
+.passi { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 56px; }
+.passi .riquadro { padding: 0 0 22px; margin-bottom: 22px; border-bottom: 1px solid var(--linea); }
+.passi .riquadro:last-child { border-bottom: 0; }
+.passi h3 { margin: 0 0 8px; font-size: .85rem; letter-spacing: .22em; text-transform: uppercase; }
+.passi .iban { font-size: 1.2rem; letter-spacing: .06em; margin: 0 0 4px; }
+.passi .twint { display: flex; gap: 22px; align-items: center; }
+.passi .twint img { width: 130px; background: #fff; padding: 6px; }
+.eo-modulo { background: transparent !important; padding: 0; }
+/* Quota: le 6 scelte come tessere regolari (dinamica in corsivo + importo), clic su tutta la tessera */
+.eo-modulo [class*="_input-radio__container"] { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.eo-modulo [class*="_input-radio__wrap"] { position: relative; display: flex !important; align-items: center; margin: 0 !important; padding: 10px 12px !important; border: 1px solid var(--linea); background: var(--bianco); cursor: pointer; }
+.eo-modulo [class*="_input-radio__wrap"] [role="button"] { position: absolute !important; inset: 0; width: auto !important; height: auto !important; margin: 0 !important; opacity: 0; z-index: 1; cursor: pointer; }
+.eo-modulo [class*="_input-radio__wrap"][class*="_checked"] { border-color: var(--blu); box-shadow: inset 0 0 0 1px var(--blu); }
+.eo-modulo [class*="_input-radio__wrap"] [class*="_input-radio__button-label"] { display: none !important; }
+.eo-modulo .q-txt { display: flex; align-items: baseline; gap: 10px; }
+.eo-modulo .q-dyn { font-family: "Times New Roman", Georgia, serif !important; font-style: italic; font-size: 1.5rem; line-height: 1; min-width: 34px; }
+.eo-modulo .q-chf { font-size: .9rem; letter-spacing: .04em; }
+.eo-modulo .q-solo { font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; }
+.eo-modulo label[class*="_label_"] { text-transform: uppercase; letter-spacing: .24em; font-size: .72rem !important; margin: 10px 0 8px; display: block; }
+.eo-modulo form, .eo-modulo div { background: transparent !important; }
+/* ---------- chi siamo (pagina) ---------- */
+.chi-testo { max-width: 780px; }
+.chi-testo p { font-size: 1.08rem; }
+.chi-foto { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-top: 40px; }
+.chi-foto img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ---------- telefono ---------- */
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   body { font-size: 16px; }
   .testata .wrap { height: auto; padding-top: 10px; padding-bottom: 12px; flex-wrap: wrap; }
-  .testata .logo img { height: 64px; }
+  .testata .logo img { height: 60px; }
   .menu { width: 100%; gap: 16px; flex-wrap: wrap; }
-  .copertina { height: 60vh; }
-  .due, .sostenitori, .quote { grid-template-columns: 1fr; }
+  .copertina { height: 56vh; }
+  .prossimi .griglia, .due, .sostenitori, .adesione, .pagamento, .passi, .anno-gruppo { grid-template-columns: 1fr; }
+  .dinamiche { grid-template-columns: 1fr 1fr; }
+  .dinamiche li, .dinamiche li:first-child { padding: 18px 14px; border-left: 0; border-top: 1px solid var(--linea); }
+  .schede { grid-template-columns: 1fr; }
+  .scheda { grid-template-columns: 100px 1fr; }
+  .prossimi .miniature { max-width: 420px; grid-template-columns: 1fr 1fr; }
+  .testata .logo span { display: none; }
+  .chi-foto { grid-template-columns: 1fr; }
+  .progetto { grid-template-columns: 1fr; padding-left: 18px; }
+  .progetto .lato { max-width: 260px; }
+  .progetto .righe .quando { display: block; min-width: 0; }
+  .tappe { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .quote li { grid-template-columns: 44px 1fr auto; }
+  .quote .cosa { grid-column: 2 / -1; }
   .ingresso { grid-template-columns: auto 1fr; }
   .ingresso .bottone { grid-column: 1 / -1; justify-self: start; }
-  section { padding: 56px 0; }
+  section { padding: 52px 0; }
 }
