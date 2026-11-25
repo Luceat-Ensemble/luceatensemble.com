@@ -177,7 +177,7 @@ h2 { margin: 0 0 32px; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700
 .loghi .negativo { filter: grayscale(1) invert(1); mix-blend-mode: screen; }
 .partner img { height: 56px; }
 
-.piede { padding: 48px 0 40px; border-top: 1px solid rgba(255,255,255,.18); text-align: center; }
+.piede { padding: 48px 0 40px; background: #1c1c1e; text-align: center; }   /* antracite: separa dal blu dei sostenitori */
 .piede .seguici { text-transform: uppercase; letter-spacing: .22em; font-size: .78rem; }
 .social { display: flex; justify-content: center; gap: 26px; margin: 14px 0 26px; }
 .social a { display: block; width: 34px; height: 34px; }
