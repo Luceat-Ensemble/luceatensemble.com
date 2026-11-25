@@ -134,6 +134,8 @@ h2 { margin: 0 0 28px; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700
 .loghi { display: flex; flex-wrap: wrap; align-items: center; gap: 26px 34px; }
 .loghi img { height: 42px; width: auto; max-width: 150px; object-fit: contain; }
 .loghi .bianco { filter: brightness(0) invert(1); }
+/* logo nero su fondo bianco (PNG senza trasparenza): inverto e tolgo il fondo */
+.loghi .negativo { filter: grayscale(1) invert(1); mix-blend-mode: screen; }
 .partner img { height: 54px; width: auto; }
 
 /* piede */
