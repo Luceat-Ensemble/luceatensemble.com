@@ -68,7 +68,8 @@ a { color: inherit; }
 /* la partitura del flyer a destra, con la curva */
 .apertura::after {
   content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 38%;
-  background: var(--partitura) right center / cover no-repeat;
+  /* solo la striscia destra del fronte del flyer (la partitura), senza i testi */
+  background: var(--partitura) right center / 560% auto no-repeat;
   -webkit-mask-image: radial-gradient(ellipse 120% 160% at 100% 50%, #000 60%, transparent 61%);
   mask-image: radial-gradient(ellipse 120% 160% at 100% 50%, #000 60%, transparent 61%);
 }
