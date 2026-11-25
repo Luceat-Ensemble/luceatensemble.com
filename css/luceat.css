@@ -40,6 +40,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 b, strong, h1, h2, h3, th { font-weight: 400; }
+/* parole lunghe (es. WEIHNACHTSKONZERT) mai oltre lo schermo del telefono: prima il &shy; nel testo, poi a capo forzato */
+h1, h2, h3 { overflow-wrap: anywhere; }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
@@ -133,7 +135,7 @@ h2 { margin: 0 0 28px; font-size: clamp(1.9rem, 3.6vw, 2.8rem); letter-spacing: 
 .programma .chi { display: block; text-transform: uppercase; letter-spacing: .22em; font-size: .72rem; color: var(--oro); }
 .programma .cosa { display: block; font-size: .95rem; opacity: .9; }
 .programma .cosa em { font-style: normal; opacity: .8; font-size: .9rem; }
-.direzione { margin: 18px 0 0; font-size: .9rem; opacity: .85; }
+.direzione { margin: 32px 0 0; font-size: .9rem; opacity: .85; }
 
 /* flyer: due miniature, clic = sovrapposizione con scorrimento fronte/retro */
 .miniature { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -184,10 +186,21 @@ h2 { margin: 0 0 28px; font-size: clamp(1.9rem, 3.6vw, 2.8rem); letter-spacing: 
 .sostenitori { display: grid; grid-template-columns: 220px 1fr; gap: 56px; align-items: start; }
 .sostenitori .etichetta { font-size: .72rem; margin-bottom: 22px; }
 .partner img { height: 64px; width: auto; filter: brightness(0) invert(1); }
-.loghi { display: flex; flex-wrap: wrap; align-items: center; gap: 30px 48px; }
-.loghi img { height: 32px; width: auto; max-width: 170px; object-fit: contain; }
+/* sostenitori: griglia di 5 colonne uguali -> sempre 2 righe da 5 su desktop (i loghi larghi si stringono se serve) */
+.loghi { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center; justify-items: start; gap: 30px 32px; }
+.loghi > a { display: block; min-width: 0; max-width: 100%; }
+.loghi img { height: 32px; width: auto; max-width: min(170px, 100%); object-fit: contain; object-position: left center; }
 .loghi img.alto { height: 46px; }      /* loghi rotondi o quadrati */
 .loghi .bianco { filter: brightness(0) invert(1); }
+/* correzioni per singolo logo (dal file, valgono in tutte le lingue):
+   Parrocchia e PerSempre hanno scritte piccole dentro un logo rotondo/quadrato -> piu' grandi;
+   Annelies Moser ha lettere piu' grandi di Huser-Oesch a parita' di altezza -> piu' piccolo */
+.loghi img[src*="Parrocchia"], .loghi img[src*="PerSempre"] { height: 84px; }
+.loghi img[src*="Annelies"] { height: 27px; }
+.loghi img[src*="Huser-Oesch"] { height: 37px; }
+/* loghi con link al sito dello sponsor */
+.loghi a, .partner a { display: inline-block; transition: opacity .2s; }
+.loghi a:hover, .partner a:hover { opacity: .7; }
 .loghi .negativo { filter: grayscale(1) invert(1); mix-blend-mode: screen; }
 
 .piede { padding: 44px 0 36px; background: var(--antracite); color: var(--bianco); text-align: center; }
@@ -230,7 +243,7 @@ h2 { margin: 0 0 28px; font-size: clamp(1.9rem, 3.6vw, 2.8rem); letter-spacing: 
 .mosaico a:hover img { transform: scale(1.03); }
 .mosaico a:nth-child(3n+1) img { aspect-ratio: 4 / 5; object-fit: cover; }
 
-.video-griglia { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px 32px; }
+.video-griglia { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 40px 32px; }
 .video-griglia figure { margin: 0; }
 .video-griglia .quando { display: block; margin-bottom: 10px; text-transform: uppercase; letter-spacing: .28em; font-size: .78rem; }
 .video, .video-griglia iframe { display: block; position: relative; width: 100%; aspect-ratio: 16 / 9; border: 0; padding: 0; background: var(--blu); cursor: pointer; overflow: hidden; }
@@ -408,6 +421,16 @@ body.beige main { background: var(--chiaro); }
   .menu a { display: block; padding: 12px 0; font-size: .9rem; border-top: 1px solid rgba(255,255,255,.12); }
   .menu .lingue { gap: 22px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,.12); }
   .menu .lingue a { border-top: 0; }
+}
+
+/* telefoni molto stretti (320-400px): quote e scelte del modulo su meno colonne */
+.passi > div, .dinamiche li { min-width: 0; }
+/* 10 loghi: 5 colonne (2 righe) o 2 colonne (5 righe), mai un logo da solo in fondo */
+@media (max-width: 900px) { body .loghi { gap: 26px 20px; } }
+@media (max-width: 600px) { body .loghi { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 400px) {
+  body .dinamiche { grid-template-columns: 1fr; }   /* "body": vince sulla regola a 2 colonne del blocco telefono, che viene dopo */
+  body .eo-modulo [class*="_input-radio__container"] { grid-template-columns: 1fr 1fr; }
 }
 
 /* ---------- telefono ---------- */
