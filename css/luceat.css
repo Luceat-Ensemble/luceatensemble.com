@@ -1,4 +1,7 @@
-/* Luceat Ensemble - stile del sito. Colori: blu scuro (principale), oro, bianco. Tipografia dei flyer (Gill Sans -> Gillius ADF). */
+/* Luceat Ensemble - stile del sito.
+   Colori: blu scuro (principale), oro e bianco. L'oro solo su fondo scuro (su chiaro non si legge).
+   Ogni progetto ha il colore del suo flyer: Natale rosso, Pasqua blu, CUJM verde.
+   Tipografia dei flyer (Gill Sans -> Gillius ADF). */
 
 @font-face {
   font-family: "Gillius";
@@ -17,11 +20,14 @@
   --blu: #011627;
   --oro: #eab003;
   --bianco: #ffffff;
-  --chiaro: #f6f3ec;          /* sezioni chiare */
+  --chiaro: #f4f1ea;
+  --natale: #430b0e;
+  --pasqua: #011629;
+  --cujm: #012718;
   --testo: #011627;
-  --tenue: rgba(1, 22, 39, .66);
+  --tenue: rgba(1, 22, 39, .7);
   --linea: rgba(1, 22, 39, .16);
-  --max: 1120px;
+  --max: 1160px;
 }
 
 * { box-sizing: border-box; }
@@ -40,90 +46,114 @@ img { max-width: 100%; display: block; }
 a { color: inherit; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
 
-/* ---------- barra in alto (blu scuro) ---------- */
+/* ---------- barra in alto: blu, menu chiaro ---------- */
 .testata { position: sticky; top: 0; z-index: 10; background: var(--blu); color: var(--bianco); }
-.testata .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 76px; }
-.testata .logo img { height: 56px; width: auto; }
-.menu { display: flex; align-items: center; gap: 28px; list-style: none; margin: 0; padding: 0; }
-.menu a { text-decoration: none; text-transform: uppercase; letter-spacing: .2em; font-size: .78rem; }
+.testata .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 96px; }
+.testata .logo img { height: 84px; width: auto; }
+.menu { display: flex; align-items: center; gap: 30px; list-style: none; margin: 0; padding: 0; }
+.menu a { text-decoration: none; text-transform: uppercase; letter-spacing: .2em; font-size: .8rem; }
 .menu a:hover, .menu a[aria-current="page"] { color: var(--oro); }
-.lingue { display: flex; gap: 10px; font-size: .72rem; letter-spacing: .2em; }
+.lingue { display: flex; gap: 10px; font-size: .74rem; letter-spacing: .2em; }
 .lingue a { text-decoration: none; opacity: .6; }
 .lingue a[aria-current] { opacity: 1; color: var(--oro); }
 
-/* ---------- foto grande ---------- */
-.foto-apertura { position: relative; background: var(--blu); }
-.foto-apertura img { width: 100%; height: min(78vh, 720px); object-fit: cover; object-position: center 40%; }
-.foto-apertura::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(1,22,39,0) 45%, rgba(1,22,39,.85) 100%); }
-.foto-apertura .didascalia { position: absolute; left: 0; right: 0; bottom: 36px; z-index: 1; color: var(--bianco); }
-.foto-apertura .nome { display: block; font-weight: 700; font-size: clamp(2rem, 5vw, 3.6rem); letter-spacing: .24em; text-transform: uppercase; line-height: 1.1; }
-.foto-apertura .sotto { display: block; font-size: clamp(.95rem, 1.8vw, 1.25rem); letter-spacing: .2em; text-transform: uppercase; color: var(--oro); }
+/* ---------- copertina: foto a scorrimento + logo ---------- */
+.copertina { position: relative; height: min(80vh, 760px); background: var(--blu); overflow: hidden; }
+.copertina img.slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; opacity: 0; animation: dissolvenza 18s infinite; }
+.copertina img.slide:nth-child(1) { animation-delay: 0s; }
+.copertina img.slide:nth-child(2) { animation-delay: 6s; }
+.copertina img.slide:nth-child(3) { animation-delay: 12s; }
+@keyframes dissolvenza { 0% { opacity: 0; } 6% { opacity: 1; } 33% { opacity: 1; } 40% { opacity: 0; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .copertina img.slide { animation: none; }
+  .copertina img.slide:first-child { opacity: 1; }
+}
+.copertina::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(1,22,39,0) 40%, rgba(1,22,39,.9) 100%); }
+.copertina .marchio { position: absolute; left: 0; right: 0; bottom: 30px; z-index: 1; color: var(--bianco); }
+.copertina .marchio img { height: clamp(120px, 18vw, 200px); width: auto; margin-left: -2%; }
+.copertina .marchio span { display: block; margin-top: -4px; font-size: clamp(.95rem, 1.7vw, 1.2rem); letter-spacing: .32em; text-transform: uppercase; }
 
 /* ---------- sezioni ---------- */
-section { padding: 80px 0; }
+section { padding: 84px 0; }
 .chiara { background: var(--chiaro); }
-.etichetta { margin: 0 0 22px; font-size: .78rem; letter-spacing: .3em; text-transform: uppercase; color: var(--oro); font-weight: 700; }
+/* etichetta: testo blu, trattino oro (l'oro su chiaro solo come segno, mai come testo) */
+.etichetta { display: flex; align-items: center; gap: 14px; margin: 0 0 22px; font-size: .8rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.etichetta::before { content: ""; width: 36px; height: 3px; background: var(--oro); }
 h2 { margin: 0 0 32px; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700; letter-spacing: .2em; text-transform: uppercase; line-height: 1.15; }
 
-/* titolo concerto, come il fronte del flyer */
-.titolo { margin: 0 0 44px; font-weight: 400; line-height: .95; text-transform: uppercase; }
-.titolo .r1 { display: block; font-size: clamp(2rem, 4.6vw, 3.4rem); letter-spacing: .1em; }
-.titolo .r2 { display: block; font-size: clamp(3.4rem, 9vw, 6.6rem); letter-spacing: .02em; }
-
-.concerto { display: grid; grid-template-columns: 1.25fr 1fr; gap: 56px; align-items: start; }
-.date { list-style: none; margin: 0; padding: 0; display: grid; gap: 26px; }
-.date li { text-transform: uppercase; }
-.date .quando, .date .dove { font-size: clamp(1.1rem, 2vw, 1.45rem); letter-spacing: .1em; }
-.date small { font-size: .72em; letter-spacing: .14em; color: var(--tenue); }
-.date .dove small { color: var(--testo); }
-.date .nota { display: block; margin-top: 4px; font-size: .72rem; font-weight: 700; letter-spacing: .26em; color: var(--oro); }
-
-/* programma, come il retro del flyer */
-.programma { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
-.programma .compositore { display: block; font-weight: 700; font-size: clamp(1.25rem, 2.2vw, 1.6rem); letter-spacing: .2em; text-transform: uppercase; line-height: 1.1; }
-.programma .opera { display: block; font-size: clamp(.95rem, 1.6vw, 1.1rem); letter-spacing: .08em; text-transform: uppercase; }
-.programma .solista { display: block; font-size: .9rem; color: var(--tenue); }
-.ensemble { margin-top: 40px; }
-.ensemble .nome { display: block; font-weight: 700; font-size: clamp(1.4rem, 3vw, 2rem); letter-spacing: .24em; text-transform: uppercase; }
-.ensemble .dir { display: block; font-size: clamp(1rem, 1.8vw, 1.25rem); letter-spacing: .06em; text-transform: uppercase; }
-
-/* ingresso */
-.ingresso { display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: center; margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--linea); }
-.ingresso .prezzo { font-weight: 700; font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: .22em; text-transform: uppercase; }
-.ingresso p { margin: 8px 0 0; letter-spacing: .18em; text-transform: uppercase; font-size: .82rem; }
-.ingresso .tenue { color: var(--tenue); }
-.qr { width: 150px; }
-
 .bottone {
-  display: inline-block; margin-top: 22px; padding: 14px 28px;
+  display: inline-block; padding: 15px 30px;
   background: var(--blu); color: var(--bianco); text-decoration: none;
-  text-transform: uppercase; letter-spacing: .24em; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .24em; font-size: .8rem; white-space: nowrap;
 }
 .bottone:hover { background: var(--oro); color: var(--blu); }
+
+/* ---------- prossimi concerti: colore del flyer del progetto ---------- */
+.progetto { color: var(--bianco); }
+.progetto.natale { background: var(--natale); }
+.progetto.pasqua { background: var(--pasqua); }
+.progetto.cujm { background: var(--cujm); }
+.progetto .etichetta::before { background: var(--oro); }
+
+/* i due lati del flyer in formato A5, scritti in HTML; clic = flyer in alta risoluzione */
+.flyer { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+.a5 {
+  display: block; position: relative; aspect-ratio: 1 / 1.414; container-type: inline-size;
+  padding: 7cqw; text-decoration: none; color: var(--bianco); background: inherit;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.22), 0 18px 40px rgba(0,0,0,.35);
+  transition: transform .2s;
+}
+.a5:hover { transform: translateY(-4px); }
+.a5 .logo-a5 { width: 46cqw; margin: 0 0 4cqw -2cqw; }
+.a5 .logo-a5.piccolo { width: 30cqw; position: absolute; top: 5cqw; right: 5cqw; margin: 0; }
+.a5 .t1 { display: block; font-size: 7.4cqw; letter-spacing: .08em; line-height: 1; text-transform: uppercase; }
+.a5 .t2 { display: block; font-size: 17cqw; line-height: .95; text-transform: uppercase; margin-bottom: 6cqw; }
+.a5 .data { margin-bottom: 4.2cqw; text-transform: uppercase; }
+.a5 .data .q, .a5 .data .d { display: block; font-size: 3.9cqw; letter-spacing: .08em; line-height: 1.35; }
+.a5 .data small { font-size: .74em; letter-spacing: .12em; opacity: .85; }
+.a5 .data .n { display: block; font-size: 2.3cqw; font-weight: 700; letter-spacing: .24em; }
+.a5 .prog { margin-top: 14cqw; }
+.a5 .prog > div { margin-bottom: 3.6cqw; text-transform: uppercase; }
+.a5 .prog b { display: block; font-size: 5cqw; letter-spacing: .2em; line-height: 1.1; }
+.a5 .prog span { display: block; font-size: 3.3cqw; letter-spacing: .06em; line-height: 1.3; }
+.a5 .prog em { display: block; font-style: normal; font-size: 2.8cqw; text-transform: none; opacity: .85; }
+.a5 .ens { position: absolute; left: 7cqw; right: 7cqw; bottom: 7cqw; text-transform: uppercase; }
+.a5 .ens b { display: block; font-size: 5.6cqw; letter-spacing: .22em; }
+.a5 .ens span { display: block; font-size: 3.6cqw; letter-spacing: .05em; }
+.flyer-nota { margin: 16px 0 0; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
+
+/* ingresso: QR | testo | biglietti */
+.ingresso { display: grid; grid-template-columns: auto 1fr auto; gap: 36px; align-items: center; margin-top: 56px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,.25); }
+.ingresso .qr { width: 140px; background: #fff; padding: 8px; }
+.ingresso .prezzo { font-weight: 700; font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: .22em; text-transform: uppercase; }
+.ingresso p { margin: 8px 0 0; letter-spacing: .16em; text-transform: uppercase; font-size: .82rem; }
+.ingresso .tenue { opacity: .8; }
+.progetto .bottone { background: var(--oro); color: var(--blu); font-weight: 700; }
+.progetto .bottone:hover { background: var(--bianco); }
 
 /* chi siamo */
 .due { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
 .due p { margin: 0 0 1em; font-size: 1.05rem; }
+.due .bottone { margin-top: 10px; }
 .due img { width: 100%; height: auto; }
 
 /* amici */
-.quote { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.quota { background: var(--bianco); border-top: 3px solid var(--oro); padding: 28px 24px; }
+.quote { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px; }
+.quota { background: var(--blu); color: var(--bianco); padding: 28px 24px; }
 .quota .dyn { font-family: "Times New Roman", Georgia, serif; font-style: italic; font-weight: 700; font-size: 2.6rem; line-height: 1; color: var(--oro); }
 .quota .nome { display: block; margin-top: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
-.quota .chf { display: block; letter-spacing: .14em; text-transform: uppercase; font-size: .9rem; }
-.quota p { margin: 12px 0 0; font-size: .95rem; color: var(--tenue); }
+.quota .chf { display: block; letter-spacing: .14em; text-transform: uppercase; font-size: .9rem; color: var(--oro); }
+.quota p { margin: 12px 0 0; font-size: .95rem; opacity: .85; }
 
-/* sostenitori e piede: fascia blu scura */
+/* sostenitori e piede: fascia blu */
 .scura { background: var(--blu); color: var(--bianco); }
-.scura .etichetta { color: var(--oro); }
 .sostenitori { display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: start; }
 .sostenitori .etichetta { font-size: .72rem; margin-bottom: 18px; }
 .loghi { display: flex; flex-wrap: wrap; align-items: center; gap: 26px 36px; }
-.loghi img { height: 42px; width: auto; max-width: 150px; object-fit: contain; }
+.loghi img { height: 44px; width: auto; max-width: 150px; object-fit: contain; }
 .loghi .bianco { filter: brightness(0) invert(1); }
 .loghi .negativo { filter: grayscale(1) invert(1); mix-blend-mode: screen; }
-.partner img { height: 54px; }
+.partner img { height: 56px; }
 
 .piede { padding: 48px 0 40px; border-top: 1px solid rgba(255,255,255,.18); text-align: center; }
 .piede .seguici { text-transform: uppercase; letter-spacing: .22em; font-size: .78rem; }
@@ -137,10 +167,12 @@ h2 { margin: 0 0 32px; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700
 /* ---------- telefono ---------- */
 @media (max-width: 860px) {
   body { font-size: 16px; }
-  .testata .wrap { height: auto; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
-  .testata .logo img { height: 44px; }
+  .testata .wrap { height: auto; padding-top: 10px; padding-bottom: 12px; flex-wrap: wrap; }
+  .testata .logo img { height: 64px; }
   .menu { width: 100%; gap: 16px; flex-wrap: wrap; }
-  .foto-apertura img { height: 56vh; }
-  .concerto, .due, .sostenitori, .quote, .ingresso { grid-template-columns: 1fr; }
+  .copertina { height: 60vh; }
+  .flyer, .due, .sostenitori, .quote { grid-template-columns: 1fr; }
+  .ingresso { grid-template-columns: auto 1fr; }
+  .ingresso .bottone { grid-column: 1 / -1; justify-self: start; }
   section { padding: 56px 0; }
 }
