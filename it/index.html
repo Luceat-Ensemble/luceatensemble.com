@@ -13,19 +13,21 @@
 <meta property="og:description" content="5, 6, 12 e 13 dicembre 2026: Muralto, Lugano, Chiasso, Locarno.">
 <meta property="og:image" content="https://luceatensemble.com/rep/media/foto_web/LUAT-LUG-25-1.jpg">
 <meta property="og:type" content="website">
-<link rel="stylesheet" href="../css/luceat.css?v=17">
+<link rel="stylesheet" href="../css/luceat.css?v=26">
 </head>
 <body>
 
 <header class="testata">
   <div class="wrap">
     <a class="logo" href="./"><img src="../rep/tipografia/loghi/Luceat/Logo_originale.svg" alt="Luceat Ensemble"><span>Coro e orchestra</span></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
     <ul class="menu">
       <li><a href="./" aria-current="page">Home</a></li>
       <li><a href="chi-siamo.html">Chi siamo</a></li>
       <li><a href="archivio.html">Concerti</a></li>
       <li><a href="media.html">Media</a></li>
       <li><a href="amici.html">Amici del Luceat</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
       <li class="lingue"><a href="./" aria-current="true">IT</a><a href="../de/">DE</a><a href="../en/">EN</a></li>
     </ul>
   </div>
@@ -51,11 +53,12 @@
     <div class="griglia">
       <div>
       <p class="sottotitolo">Date e luoghi</p>
-      <ul class="date">
-        <li><span class="quando">Sabato 5 dicembre 2026 · 20:00</span><span class="dove">Muralto, Collegiata S. Vittore</span><span class="nota">Offerte libere a favore di Telethon Svizzera</span></li>
-        <li><span class="quando">Domenica 6 dicembre 2026 · 17:00</span><span class="dove">Lugano, Cattedrale S. Lorenzo</span></li>
-        <li><span class="quando">Sabato 12 dicembre 2026 · 20:00</span><span class="dove">Chiasso, Chiesa di S. Vitale</span></li>
-        <li><span class="quando">Domenica 13 dicembre 2026 · 17:00</span><span class="dove">Locarno, Collegiata S. Antonio</span></li>
+      <!-- date a blocchi come in Concerti (giorno della settimana, giorno, mese | citta, chiesa, ora), piu' grandi -->
+      <ul class="date-blocchi">
+        <li><span class="data"><span class="gs">sab</span><span class="giorno">5</span><span class="mese">dic</span></span><span class="testo"><span class="citta">Muralto</span><span class="luogo">Collegiata S. Vittore</span><span class="ora">ore 20:00</span></span><span class="nota">Offerte libere a favore di Telethon Svizzera</span></li>
+        <li><span class="data"><span class="gs">dom</span><span class="giorno">6</span><span class="mese">dic</span></span><span class="testo"><span class="citta">Lugano</span><span class="luogo">Cattedrale S. Lorenzo</span><span class="ora">ore 17:00</span></span></li>
+        <li><span class="data"><span class="gs">sab</span><span class="giorno">12</span><span class="mese">dic</span></span><span class="testo"><span class="citta">Chiasso</span><span class="luogo">Chiesa di S. Vitale</span><span class="ora">ore 20:00</span></span></li>
+        <li><span class="data"><span class="gs">dom</span><span class="giorno">13</span><span class="mese">dic</span></span><span class="testo"><span class="citta">Locarno</span><span class="luogo">Collegiata S. Antonio</span><span class="ora">ore 17:00</span></span></li>
       </ul>
       </div>
       <div>
@@ -166,6 +169,6 @@
   </div>
 </footer>
 
-<script src="../js/luceat.js"></script>
+<script src="../js/luceat.js?v=28"></script>
 </body>
 </html>

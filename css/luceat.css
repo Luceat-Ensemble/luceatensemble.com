@@ -13,6 +13,7 @@
 :root {
   --blu: #011627;
   --oro: #eab003;
+  --oro-chiaro: #feedbb;   /* oro sbiancato del logo (cerchi): sul colore del progetto al posto dell'oro pieno */
   --bianco: #ffffff;
   --chiaro: #f4f1ea;
   --natale: #430b0e;
@@ -112,6 +113,21 @@ h2 { margin: 0 0 28px; font-size: clamp(1.9rem, 3.6vw, 2.8rem); letter-spacing: 
 .date .quando { display: block; text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; opacity: .7; }
 .date .dove { display: block; font-size: .98rem; opacity: .92; }
 .date .nota { display: block; font-size: .82rem; color: var(--oro); }
+/* date a blocchi in home (come in Concerti, ma piu' grandi e leggibili sul colore del progetto) */
+/* blocco data alto quanto le 3 righe di testo: SAB in alto (con la citta), DIC in basso (con l'ora), numero al centro */
+.date-blocchi { list-style: none; margin: 0; padding: 0; }
+.date-blocchi li { display: grid; grid-template-columns: 3.4rem 1fr; column-gap: 22px; padding: 16px 0; border-top: 1px solid rgba(255,255,255,.22); }
+.date-blocchi li:last-child { border-bottom: 1px solid rgba(255,255,255,.22); }
+.date-blocchi .data { display: flex; flex-direction: column; justify-content: space-between; align-items: center; color: var(--oro); }
+.date-blocchi .testo { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+.date-blocchi .gs, .date-blocchi .mese { text-transform: uppercase; letter-spacing: .16em; font-size: .9rem; line-height: 1.5; }
+.date-blocchi .giorno { font-size: 2.1rem; line-height: 1; color: var(--bianco); }
+.date-blocchi .citta { text-transform: uppercase; letter-spacing: .16em; font-size: 1rem; line-height: 1.5; }
+.date-blocchi .luogo { font-size: 1.05rem; line-height: 1.5; }
+.date-blocchi .ora { font-size: 1rem; letter-spacing: .04em; line-height: 1.5; opacity: .85; }
+.date-blocchi .nota { grid-column: 2; font-size: .88rem; color: var(--oro); margin-top: 6px; }
+/* nella fascia del progetto (home): oro vero solo su "Prossimi concerti" e compositori; date e nota in oro sbiancato del logo */
+.prossimi .date-blocchi .data, .prossimi .date-blocchi .nota { color: var(--oro-chiaro); }
 .programma { list-style: none; margin: 0; padding: 0; }
 .programma li { padding: 9px 0; border-top: 1px solid rgba(255,255,255,.22); }
 .programma .chi { display: block; text-transform: uppercase; letter-spacing: .22em; font-size: .72rem; color: var(--oro); }
@@ -348,12 +364,57 @@ body.beige main { background: var(--chiaro); }
 .chi-foto { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-top: 40px; }
 .chi-foto img { width: 100%; height: 100%; object-fit: cover; }
 
+/* ---------- contatti ---------- */
+.contatti { display: grid; grid-template-columns: 1.2fr 1fr; gap: 72px; align-items: start; }
+.modulo label { display: block; margin-bottom: 18px; text-transform: uppercase; letter-spacing: .24em; font-size: .72rem; }
+.modulo input, .modulo textarea {
+  display: block; width: 100%; margin-top: 8px; padding: 12px 14px;
+  border: 1px solid var(--linea); border-radius: 0; background: var(--bianco); color: var(--testo);
+  font: inherit; font-size: 1rem; letter-spacing: .02em; text-transform: none;
+}
+.modulo input:focus, .modulo textarea:focus { outline: 0; border-color: var(--blu); box-shadow: inset 0 0 0 1px var(--blu); }
+.modulo textarea { resize: vertical; min-height: 160px; }
+.modulo .trappola { position: absolute; left: -9999px; }
+.contatto-mail { margin: 0 0 40px; font-size: 1.2rem; letter-spacing: .04em; }
+.contatto-mail a { text-decoration: none; border-bottom: 1px solid var(--oro); }
+.collegamenti { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--linea); }
+.collegamenti a { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--linea); text-decoration: none; }
+.collegamenti a::after { content: "\2197"; color: var(--tenue); }
+.collegamenti a:hover::after { color: var(--testo); }
+.collegamenti .chi { text-transform: uppercase; letter-spacing: .2em; font-size: .8rem; }
+.collegamenti .cosa { margin-left: auto; font-size: .9rem; color: var(--tenue); text-align: right; }
+
+/* ---------- menu a panino ---------- */
+.menu-btn { display: none; position: relative; width: 44px; height: 44px; padding: 0; border: 0; background: none; color: var(--bianco); cursor: pointer; }
+.menu-btn span, .menu-btn span::before, .menu-btn span::after { position: absolute; left: 10px; width: 24px; height: 2px; background: currentColor; transition: transform .2s, opacity .2s; }
+.menu-btn span { top: 21px; }
+.menu-btn span::before, .menu-btn span::after { content: ""; left: 0; }
+.menu-btn span::before { top: -7px; }
+.menu-btn span::after { top: 7px; }
+.testata.aperta .menu-btn span { background: transparent; }
+.testata.aperta .menu-btn span::before { transform: translateY(7px) rotate(45deg); }
+.testata.aperta .menu-btn span::after { transform: translateY(-7px) rotate(-45deg); }
+.menu a { white-space: nowrap; }
+
+/* ---------- schermi stretti: menu a panino (sotto 1100px le 6 voci non stanno su una riga) ---------- */
+@media (max-width: 1100px) {
+  .testata .wrap { height: 72px; flex-wrap: wrap; }
+  .testata .logo img { height: 56px; }
+  .menu-btn { display: block; }
+  .menu { display: none; width: 100%; flex-direction: column; align-items: flex-start; gap: 0; padding: 4px 0 18px; }
+  .testata.aperta .wrap { height: auto; padding-top: 8px; }
+  .testata.aperta .menu { display: flex; }
+  .menu li { width: 100%; }
+  .menu a { display: block; padding: 12px 0; font-size: .9rem; border-top: 1px solid rgba(255,255,255,.12); }
+  .menu .lingue { gap: 22px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,.12); }
+  .menu .lingue a { border-top: 0; }
+}
+
 /* ---------- telefono ---------- */
 @media (max-width: 900px) {
   body { font-size: 16px; }
-  .testata .wrap { height: auto; padding-top: 10px; padding-bottom: 12px; flex-wrap: wrap; }
-  .testata .logo img { height: 60px; }
-  .menu { width: 100%; gap: 16px; flex-wrap: wrap; }
+  .contatti { grid-template-columns: 1fr; gap: 48px; }
+  .collegamenti .cosa { font-size: .82rem; }
   .copertina { height: 56vh; }
   .prossimi .griglia, .due, .sostenitori, .adesione, .pagamento, .passi, .anno-gruppo { grid-template-columns: 1fr; }
   .dinamiche { grid-template-columns: 1fr 1fr; }

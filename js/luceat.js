@@ -1,5 +1,14 @@
 // Luceat - comportamenti del sito (senza JS tutto funziona lo stesso: link e immagini normali).
 
+// 0. Menu a panino sul telefono: apre/chiude la lista del menu.
+document.querySelectorAll('.menu-btn').forEach(function (b) {
+  var testata = b.closest('.testata');
+  b.addEventListener('click', function () {
+    var aperta = testata.classList.toggle('aperta');
+    b.setAttribute('aria-expanded', aperta ? 'true' : 'false');
+  });
+});
+
 // 1. Immagini in sovrapposizione a schermo intero, con scorrimento (dito, frecce, tastiera).
 //    Ogni gruppo (.flyer o .galleria) diventa una sequenza; i link sono a.a5 o a.lb.
 document.querySelectorAll('.flyer, .galleria').forEach(function (gruppo) {
